@@ -1,4 +1,5 @@
 import { ApolloServer, gql } from "apollo-server";
+import crypto from "crypto";
 
 const users = [
   {
@@ -23,6 +24,18 @@ const typeDefs = gql`
     user(id:ID!): User
   }
 
+  input UserInput {
+    firstName: String!
+    lastName: String!
+    email: String!
+    password: String!
+  }
+
+  type Mutation {
+    createUser(newUser: UserInput!): User
+  }
+
+
   type User {
     id: ID!
     firstName: String
@@ -39,6 +52,16 @@ const resolvers = {
       console.log(id);
       return users.find((user) => user.id === parseInt(id));
     }
+  },
+  Mutation: {
+    createUser: (parent, { newUser }, context) => {
+      const user = {
+        id: crypto.randomBytes(10).toString("hex"),
+        ...newUser,
+      };
+      users.push(user);
+      return user;
+    },
   },
 };
 
