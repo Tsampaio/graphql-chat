@@ -1,6 +1,6 @@
 import { ApolloServer, gql } from "apollo-server";
-import { resolvers } from "./resolvers";
-import { typeDefs } from "./typeDefs";
+import resolvers from "./resolvers.js";
+import typeDefs from "./typeDefs.js";
 
 const server = new ApolloServer({
   typeDefs,

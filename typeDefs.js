@@ -14,9 +14,8 @@ const typeDefs = gql`
   }
 
   type Mutation {
-
+    signupUser(input: UserInput!): User
   }
-
 
   type User {
     id: ID!
@@ -24,11 +23,6 @@ const typeDefs = gql`
     lastName: String!
     email: String!
     password: String!
-  }
-
-  type Todo {
-    title: String!
-    by: ID!
   }
 `;
 
