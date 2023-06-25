@@ -67,6 +67,7 @@ const resolvers = {
     users: () => users,
     user: (parent, { id }, context) => {
       console.log(id);
+      console.log(context);
       return users.find((user) => user.id === id);
     }
   },
@@ -90,6 +91,9 @@ const resolvers = {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  context: {
+    userLoggedIn: true
+  }
 });
 
 server.listen().then(({ url }) => {
